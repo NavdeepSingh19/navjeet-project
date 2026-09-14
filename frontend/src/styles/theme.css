@@ -231,6 +231,44 @@ button {
   z-index: 1200;
 }
 
+/* ---------- City chips ---------- */
+
+.city-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 24px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.city-chip {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 13px;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.city-chip:hover:not(:disabled):not(.active) {
+  border-color: #5dade2;
+  background: var(--hover);
+}
+
+.city-chip.active {
+  background: #5dade2;
+  border-color: #5dade2;
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.city-chip:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 /* ---------- Map ---------- */
 
 .map-shell {

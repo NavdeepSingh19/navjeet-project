@@ -50,7 +50,7 @@ export default function ControlPanel({ viewMode, onViewModeChange, selectedCell,
           <h2>City Summary</h2>
           <div className="summary-card">
             <p><span>Total population</span><strong>{metadata.total_population?.toLocaleString()}</strong></p>
-            <p><span>Avg. accessibility</span><strong>{metadata.avg_accessibility} min</strong></p>
+            <p><span>Avg. accessibility</span><strong>{metadata.avg_accessibility}</strong></p>
             <p><span>Cells shown</span><strong>{metadata.returned_cells} / {metadata.total_cells}</strong></p>
           </div>
         </section>

@@ -13,15 +13,15 @@ export function getAccessibilityInfo(properties) {
   const avgTime = variety > 0 ? totalDestinations / variety : 30
 
   if (avgTime < 3) {
-    return { level: 'excellent', label: 'Excellent', range: '0-3 min walk', color: ACCESSIBILITY_COLORS.excellent, avgTime }
+    return { level: 'excellent', label: 'Excellent', range: '0-3', color: ACCESSIBILITY_COLORS.excellent, avgTime }
   }
   if (avgTime < 9) {
-    return { level: 'good', label: 'Good', range: '3-9 min walk', color: ACCESSIBILITY_COLORS.good, avgTime }
+    return { level: 'good', label: 'Good', range: '3-9', color: ACCESSIBILITY_COLORS.good, avgTime }
   }
   if (avgTime < 15) {
-    return { level: 'moderate', label: 'Moderate', range: '9-15 min walk', color: ACCESSIBILITY_COLORS.moderate, avgTime }
+    return { level: 'moderate', label: 'Moderate', range: '9-15', color: ACCESSIBILITY_COLORS.moderate, avgTime }
   }
-  return { level: 'poor', label: 'Poor', range: '15+ min walk', color: ACCESSIBILITY_COLORS.poor, avgTime }
+  return { level: 'poor', label: 'Poor', range: '15+', color: ACCESSIBILITY_COLORS.poor, avgTime }
 }
 
 export function getPopulationColor(population, maxPopulation) {

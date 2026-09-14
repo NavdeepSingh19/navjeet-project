@@ -30,6 +30,11 @@ def error(message, code, status_code=400):
     raise HTTPException(status_code=status_code, detail={"error": message, "code": code})
 
 
+@app.get("/api/cities")
+def list_cities():
+    return sorted(CITY_INFO.values(), key=lambda info: info["name"])
+
+
 @app.get("/api/cities/search")
 def search_cities(query: str = Query(default="")):
     if len(query.strip()) < 2:

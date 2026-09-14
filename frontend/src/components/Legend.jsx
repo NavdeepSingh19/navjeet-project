@@ -2,12 +2,12 @@ import { ACCESSIBILITY_COLORS } from '../utils/colors'
 
 const LEGEND_BY_MODE = {
   accessibility: {
-    title: 'Accessibility (walk time)',
+    title: 'Accessibility (by total_destinations and variety)',
     items: [
-      { color: ACCESSIBILITY_COLORS.excellent, label: 'Excellent', range: '0-3 min' },
-      { color: ACCESSIBILITY_COLORS.good, label: 'Good', range: '3-9 min' },
-      { color: ACCESSIBILITY_COLORS.moderate, label: 'Moderate', range: '9-15 min' },
-      { color: ACCESSIBILITY_COLORS.poor, label: 'Poor', range: '15+ min' },
+      { color: ACCESSIBILITY_COLORS.excellent, label: 'Excellent', range: '0-3' },
+      { color: ACCESSIBILITY_COLORS.good, label: 'Good', range: '3-9' },
+      { color: ACCESSIBILITY_COLORS.moderate, label: 'Moderate', range: '9-15' },
+      { color: ACCESSIBILITY_COLORS.poor, label: 'Poor', range: '15+' },
     ],
   },
   population: {

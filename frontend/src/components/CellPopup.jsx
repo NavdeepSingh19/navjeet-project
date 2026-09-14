@@ -25,7 +25,7 @@ export default function CellPopup({ feature, onClose }) {
           <div><dt>Population</dt><dd>{Math.round(properties.population).toLocaleString()}</dd></div>
           <div><dt>Destinations score</dt><dd>{formatScore(properties.total_destinations)}</dd></div>
           <div><dt>Amenity variety</dt><dd>{properties.variety} types</dd></div>
-          <div><dt>Est. walk time</dt><dd>{info.range}</dd></div>
+          <div><dt>Accessibility range</dt><dd>{info.range}</dd></div>
         </dl>
       </div>
     </div>

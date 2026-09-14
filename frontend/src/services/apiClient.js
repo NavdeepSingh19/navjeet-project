@@ -25,6 +25,11 @@ client.interceptors.response.use(
   },
 )
 
+export async function listCities() {
+  const { data } = await client.get('/cities')
+  return data
+}
+
 export async function searchCities(query) {
   const { data } = await client.get('/cities/search', { params: { query } })
   return data
@@ -45,4 +50,4 @@ export async function getCellDetails(cityName, h3Index) {
   return data
 }
 
-export default { searchCities, getCityMetrics, getCellDetails }
+export default { listCities, searchCities, getCityMetrics, getCellDetails }

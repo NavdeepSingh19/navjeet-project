@@ -1,9 +1,11 @@
 # Accessibility Metrics Map
 
-Interactive H3 hexagon map of 15-minute city accessibility for Amritsar, Punjab.
+Interactive H3 hexagon map of accessibility (by total destinations and amenity
+variety) across 8 Indian cities: Amritsar, Mumbai, New Delhi, Bengaluru,
+Delhi, Kolkata, Chennai and Hyderabad.
 
-The bundled dataset (`backend/data/Amritsar_accessibility_metrics_with_pop.geojson`)
-has 162,868 hexagon features (82MB) — far more than a browser can render or a
+The bundled datasets (`backend/data/*.geojson`, one per city) total roughly
+420,000 hexagon features (~198MB) — far more than a browser can render or a
 bundler can ship directly. So this is a real two-part app:
 
 - **backend/** — a small FastAPI service that loads the GeoJSON once and
@@ -37,7 +39,8 @@ config is needed locally.
 
 ## API
 
-- `GET /api/cities/search?query=` — city search (Amritsar only, for now)
+- `GET /api/cities` — list all registered cities with their metadata
+- `GET /api/cities/search?query=` — city search by name/state (2+ characters)
 - `GET /api/cities/{city}/accessibility-metrics?min_lon=&min_lat=&max_lon=&max_lat=&limit=`
   — GeoJSON + metadata, filtered to the given bounding box and capped at
   `limit` features (evenly decimated if more match, default/max 4000)
@@ -80,12 +83,18 @@ as-is — no dashboard build-command overrides needed.
 
 **Things to know before deploying:**
 
-- The bundled dataset is 79MB. Serverless functions have a 250MB
-  unzipped size limit (data + FastAPI + numpy fit comfortably), but the
-  function reads and parses the whole file from scratch on every cold
-  start — expect a few seconds of added latency on the first request
-  after an idle period, and keep an eye on your plan's function
-  duration limit if cold starts get close to it.
+- The bundled datasets now total ~198MB across all 8 cities. Serverless
+  functions have a 250MB unzipped size limit — with FastAPI, numpy and the
+  Python runtime added on top, this is close enough to the ceiling that it
+  may not fit depending on the exact plan/runtime overhead. Check your
+  deployment's actual function size before relying on this; if it's too
+  large, drop cities you don't need from `backend/data/` and
+  `backend/data_loader.py`, or move to the long-running host option below.
+- A city's dataset is only loaded into memory the first time it's
+  requested (and cached per warm instance after that), so cold-start
+  latency scales with whichever single city is requested, not the total
+  198MB — but the whole 198MB still counts against the function's deployed
+  size limit regardless of what's loaded at runtime.
 - If you outgrow this (bigger cities, more traffic, slow cold starts),
   consider hosting `backend/` on a long-running host instead (Render,
   Railway, Fly.io) and deploying only `frontend/` on Vercel with

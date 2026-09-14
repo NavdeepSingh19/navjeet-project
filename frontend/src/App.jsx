@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import MapContainerView from './components/MapContainer'
 import SearchBar from './components/SearchBar'
+import CitySelector from './components/CitySelector'
 import ControlPanel from './components/ControlPanel'
 import Legend from './components/Legend'
 import CellPopup from './components/CellPopup'
@@ -44,10 +45,12 @@ export default function App() {
       <header className="app-header">
         <div className="app-title">
           <h1>Accessibility Metrics</h1>
-          <span className="app-subtitle">15-minute city explorer</span>
+          <span className="app-subtitle">Accessibility explorer for Indian cities</span>
         </div>
         <SearchBar onSearch={searchCities} onSelectCity={handleSelectCity} disabled={loading} />
       </header>
+
+      <CitySelector currentCity={mapData?.city} onSelectCity={handleSelectCity} disabled={loading} />
 
       <main className="app-main">
         <section className="map-section" aria-label="Interactive accessibility map">

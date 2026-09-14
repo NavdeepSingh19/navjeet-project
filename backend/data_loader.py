@@ -10,6 +10,13 @@ DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
 
 CITY_FILES = {
     "amritsar": "Amritsar_accessibility_metrics_with_pop.geojson",
+    "mumbai": "Mumbai_accessibility_metrics_with_pop.geojson",
+    "new delhi": "NewDelhi_accessibility_metrics_with_pop.geojson",
+    "bengaluru": "Bengaluru_accessibility_metrics_with_pop.geojson",
+    "delhi": "Delhi_unified_accessibility_metrics_with_pop.geojson",
+    "kolkata": "Kolkata_India-h3_accessibility_metrics_with_pop.geojson",
+    "chennai": "Chennai_accessibility_metrics_with_pop.geojson",
+    "hyderabad": "Hyderabad_accessibility_metrics_with_pop.geojson",
 }
 
 CITY_INFO = {
@@ -19,6 +26,55 @@ CITY_INFO = {
         "country": "India",
         "coordinates": [31.6340, 74.8711],
         "population": 1200000,
+    },
+    "mumbai": {
+        "name": "Mumbai",
+        "state": "Maharashtra",
+        "country": "India",
+        "coordinates": [19.0760, 72.8777],
+        "population": 20410000,
+    },
+    "new delhi": {
+        "name": "New Delhi",
+        "state": "Delhi",
+        "country": "India",
+        "coordinates": [28.6139, 77.2090],
+        "population": 16753235,
+    },
+    "bengaluru": {
+        "name": "Bengaluru",
+        "state": "Karnataka",
+        "country": "India",
+        "coordinates": [12.9716, 77.5946],
+        "population": 8436675,
+    },
+    "delhi": {
+        "name": "Delhi",
+        "state": "Delhi",
+        "country": "India",
+        "coordinates": [28.7041, 77.1025],
+        "population": 16753235,
+    },
+    "kolkata": {
+        "name": "Kolkata",
+        "state": "West Bengal",
+        "country": "India",
+        "coordinates": [22.5726, 88.3639],
+        "population": 14681900,
+    },
+    "chennai": {
+        "name": "Chennai",
+        "state": "Tamil Nadu",
+        "country": "India",
+        "coordinates": [13.0827, 80.2707],
+        "population": 7088589,
+    },
+    "hyderabad": {
+        "name": "Hyderabad",
+        "state": "Telangana",
+        "country": "India",
+        "coordinates": [17.3850, 78.4867],
+        "population": 9740038,
     },
 }
 
