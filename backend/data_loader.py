@@ -9,7 +9,6 @@ import numpy as np
 DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
 
 CITY_FILES = {
-    "amritsar": "Amritsar_accessibility_metrics_with_pop.geojson",
     "mumbai": "Mumbai_accessibility_metrics_with_pop.geojson",
     "new delhi": "NewDelhi_accessibility_metrics_with_pop.geojson",
     "bengaluru": "Bengaluru_accessibility_metrics_with_pop.geojson",
@@ -20,13 +19,6 @@ CITY_FILES = {
 }
 
 CITY_INFO = {
-    "amritsar": {
-        "name": "Amritsar",
-        "state": "Punjab",
-        "country": "India",
-        "coordinates": [31.6340, 74.8711],
-        "population": 1200000,
-    },
     "mumbai": {
         "name": "Mumbai",
         "state": "Maharashtra",

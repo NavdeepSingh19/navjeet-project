@@ -68,7 +68,7 @@ export default function SearchBar({ onSearch, onSelectCity, disabled }) {
           type="text"
           value={query}
           disabled={disabled}
-          placeholder="Search cities (e.g. Amritsar)..."
+          placeholder="Search cities (e.g. Mumbai)..."
           onChange={(event) => setQuery(event.target.value)}
           onFocus={() => results.length > 0 && setIsOpen(true)}
           autoComplete="off"
@@ -95,7 +95,7 @@ export default function SearchBar({ onSearch, onSelectCity, disabled }) {
       )}
 
       {isOpen && !isSearching && results.length === 0 && query.trim().length >= 2 && !searchError && (
-        <p className="search-empty">No city found. Try searching Amritsar, Punjab</p>
+        <p className="search-empty">No city found. Try searching Mumbai, Maharashtra</p>
       )}
     </div>
   )

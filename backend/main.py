@@ -61,7 +61,7 @@ def get_city_metrics(
     city_key = city_name.lower()
     dataset = get_dataset(city_key)
     if dataset is None:
-        error("No city found. Try searching Amritsar, Punjab", "CITY_NOT_FOUND", status_code=404)
+        error("No city found. Try searching Mumbai, Maharashtra", "CITY_NOT_FOUND", status_code=404)
 
     bbox = None
     if None not in (min_lon, min_lat, max_lon, max_lat):
@@ -92,7 +92,7 @@ def get_city_metrics(
 def get_cell(city_name: str, h3_index: str):
     dataset = get_dataset(city_name.lower())
     if dataset is None:
-        error("No city found. Try searching Amritsar, Punjab", "CITY_NOT_FOUND", status_code=404)
+        error("No city found. Try searching Mumbai, Maharashtra", "CITY_NOT_FOUND", status_code=404)
 
     feature = dataset.get_by_h3(h3_index)
     if feature is None:

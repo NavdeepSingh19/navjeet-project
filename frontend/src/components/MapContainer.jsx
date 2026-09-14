@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css'
 import { getColorForMode } from '../utils/colors'
 import LoadingSpinner from './LoadingSpinner'
 
-const AMRITSAR_CENTER = [31.634, 74.8711]
+const DEFAULT_CENTER = [19.076, 72.8777] // Mumbai
 const DEFAULT_ZOOM = 13
 const VIEWPORT_DEBOUNCE_MS = 400
 
@@ -115,7 +115,7 @@ export default function MapContainer({
   version,
   onRetry,
 }) {
-  const center = mapData?.center ?? AMRITSAR_CENTER
+  const center = mapData?.center ?? DEFAULT_CENTER
 
   return (
     <div className="map-shell">

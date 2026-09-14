@@ -7,7 +7,7 @@ import Legend from './components/Legend'
 import CellPopup from './components/CellPopup'
 import useMapData from './hooks/useMapData'
 
-const DEFAULT_CITY = 'Amritsar'
+const DEFAULT_CITY = 'Mumbai'
 
 export default function App() {
   const { mapData, loading, error, version, fetchCityData, fetchViewport, searchCities, retry } = useMapData()
