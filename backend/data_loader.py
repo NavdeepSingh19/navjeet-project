@@ -40,10 +40,8 @@ class CityDataset:
         self.by_h3 = {}
         for i, feat in enumerate(self.features):
             ring = feat["geometry"]["coordinates"][0]
-            lons = [c[0] for c in ring]
-            lats = [c[1] for c in ring]
-            centroids[i, 0] = sum(lons) / len(lons)
-            centroids[i, 1] = sum(lats) / len(lats)
+            ring_arr = np.asarray(ring, dtype=np.float64)
+            centroids[i] = ring_arr.mean(axis=0)
 
             props = feat["properties"]
             populations[i] = props.get("population") or 0

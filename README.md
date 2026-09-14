@@ -55,3 +55,34 @@ URL before building if the frontend and backend live on different origins,
 and enable CORS on the backend for the frontend's domain (currently open
 to `*` for development — tighten `allow_origins` in `backend/main.py`
 before deploying).
+
+## Deploying to Vercel
+
+The root `vercel.json` deploys this as a single Vercel project:
+
+- `frontend/` is built with `@vercel/static-build` (`npm run build` →
+  `frontend/dist`) and served as static assets.
+- `backend/main.py` is deployed as a Python serverless function
+  (`@vercel/python`), with `data/**` bundled in via `includeFiles` so the
+  function can read the GeoJSON at runtime.
+- `/api/*` requests are routed to the function; everything else is served
+  from `frontend/dist`. Because both live on the same domain, the
+  frontend's default relative `/api` base URL (`frontend/src/services/apiClient.js`)
+  works as-is — no `VITE_API_URL` or CORS changes needed for this setup.
+
+Just import the repo into Vercel (or run `vercel`) with the project root
+as-is — no dashboard build-command overrides needed.
+
+**Things to know before deploying:**
+
+- The bundled dataset is 79MB. Serverless functions have a 250MB
+  unzipped size limit (data + FastAPI + numpy fit comfortably), but the
+  function reads and parses the whole file from scratch on every cold
+  start — expect a few seconds of added latency on the first request
+  after an idle period, and keep an eye on your plan's function
+  duration limit (Hobby defaults to 10s; raise `maxDuration` or upgrade
+  if cold starts get close to it).
+- If you outgrow this (bigger cities, more traffic, slow cold starts),
+  consider hosting `backend/` on a long-running host instead (Render,
+  Railway, Fly.io) and deploying only `frontend/` on Vercel with
+  `VITE_API_URL` pointed at it.
