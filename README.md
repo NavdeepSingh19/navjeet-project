@@ -2,8 +2,8 @@
 
 Interactive H3 hexagon map of 15-minute city accessibility for Amritsar, Punjab.
 
-The bundled dataset (`data/Amritsar_accessibility_metrics_with_pop.geojson`) has
-162,868 hexagon features (82MB) — far more than a browser can render or a
+The bundled dataset (`backend/data/Amritsar_accessibility_metrics_with_pop.geojson`)
+has 162,868 hexagon features (82MB) — far more than a browser can render or a
 bundler can ship directly. So this is a real two-part app:
 
 - **backend/** — a small FastAPI service that loads the GeoJSON once and
@@ -58,17 +58,22 @@ before deploying).
 
 ## Deploying to Vercel
 
-The root `vercel.json` deploys this as a single Vercel project:
+The root `vercel.json` deploys this as a single Vercel project using
+[Vercel Services](https://vercel.com/docs/services), which builds each part
+of the repo as its own independently-built service sharing one domain:
 
-- `frontend/` is built with `@vercel/static-build` (`npm run build` →
-  `frontend/dist`) and served as static assets.
-- `backend/main.py` is deployed as a Python serverless function
-  (`@vercel/python`), with `data/**` bundled in via `includeFiles` so the
-  function can read the GeoJSON at runtime.
-- `/api/*` requests are routed to the function; everything else is served
-  from `frontend/dist`. Because both live on the same domain, the
-  frontend's default relative `/api` base URL (`frontend/src/services/apiClient.js`)
-  works as-is — no `VITE_API_URL` or CORS changes needed for this setup.
+- `frontend` service (`root: frontend`) — built as a Vite app, served as
+  static assets.
+- `backend` service (`root: backend`, `entrypoint: main:app`) — the FastAPI
+  app deployed as a Python function. Because a service is built as a
+  standalone unit rooted at its own directory, the dataset lives at
+  `backend/data/` (inside the service root) rather than a shared top-level
+  `data/` folder, so it's included automatically.
+- Top-level `rewrites` expose both services publicly: `/api/*` routes to
+  `backend`, everything else to `frontend`. Because both share one domain,
+  the frontend's default relative `/api` base URL
+  (`frontend/src/services/apiClient.js`) works as-is — no `VITE_API_URL` or
+  CORS changes needed for this setup.
 
 Just import the repo into Vercel (or run `vercel`) with the project root
 as-is — no dashboard build-command overrides needed.
@@ -80,8 +85,7 @@ as-is — no dashboard build-command overrides needed.
   function reads and parses the whole file from scratch on every cold
   start — expect a few seconds of added latency on the first request
   after an idle period, and keep an eye on your plan's function
-  duration limit (Hobby defaults to 10s; raise `maxDuration` or upgrade
-  if cold starts get close to it).
+  duration limit if cold starts get close to it.
 - If you outgrow this (bigger cities, more traffic, slow cold starts),
   consider hosting `backend/` on a long-running host instead (Render,
   Railway, Fly.io) and deploying only `frontend/` on Vercel with

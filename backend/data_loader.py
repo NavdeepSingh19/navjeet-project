@@ -6,7 +6,7 @@ import json
 import os
 import numpy as np
 
-DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
+DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
 
 CITY_FILES = {
     "amritsar": "Amritsar_accessibility_metrics_with_pop.geojson",
