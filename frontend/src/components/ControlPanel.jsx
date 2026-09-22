@@ -1,5 +1,4 @@
 import { Info } from 'lucide-react'
-import { getAccessibilityInfo } from '../utils/colors'
 import { formatScore } from '../utils/format'
 
 const MODES = [
@@ -9,17 +8,12 @@ const MODES = [
 ]
 
 export function CellDetailsCard({ properties }) {
-  const info = getAccessibilityInfo(properties)
   return (
     <div className="detail-card">
       <p><span>H3 index</span><strong className="mono">{properties.h3_index}</strong></p>
       <p><span>Population</span><strong>{Math.round(properties.population).toLocaleString()}</strong></p>
       <p><span>Destinations score</span><strong>{formatScore(properties.total_destinations)}</strong></p>
       <p><span>Variety</span><strong>{properties.variety}</strong></p>
-      <p>
-        <span>Accessibility</span>
-        <strong className="accessibility-badge" style={{ color: info.color }}>{info.label}</strong>
-      </p>
     </div>
   )
 }
@@ -51,6 +45,7 @@ export default function ControlPanel({ viewMode, onViewModeChange, selectedCell,
           <div className="summary-card">
             <p><span>Total population</span><strong>{metadata.total_population?.toLocaleString()}</strong></p>
             <p><span>Avg. accessibility</span><strong>{metadata.avg_accessibility}</strong></p>
+            <p><span>Avg. variety</span><strong>{metadata.avg_variety}</strong></p>
             <p><span>Cells shown</span><strong>{metadata.returned_cells} / {metadata.total_cells}</strong></p>
           </div>
         </section>

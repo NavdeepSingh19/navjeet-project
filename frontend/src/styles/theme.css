@@ -477,10 +477,6 @@ button {
   text-align: right;
 }
 
-.accessibility-badge {
-  font-weight: 700;
-}
-
 .empty-hint {
   display: flex;
   align-items: center;
@@ -535,16 +531,6 @@ button {
   font-size: 16px;
   padding-right: 24px;
   margin-bottom: 8px;
-}
-
-.accessibility-tag {
-  display: inline-block;
-  color: #1a1a1a;
-  font-weight: 700;
-  font-size: 12px;
-  padding: 4px 10px;
-  border-radius: 999px;
-  margin-bottom: 16px;
 }
 
 .cell-popup dl {

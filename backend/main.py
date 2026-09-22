@@ -79,6 +79,7 @@ def get_city_metrics(
         "metadata": {
             "total_population": info["population"],
             "avg_accessibility": round(dataset.avg_accessibility, 2),
+            "avg_variety": round(dataset.avg_variety, 2),
             "max_population": dataset.max_population,
             "max_variety": dataset.max_variety,
             "total_cells": len(dataset.features),

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { GeoJSON, MapContainer as LeafletMap, TileLayer, useMap, useMapEvents } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import { getColorForMode } from '../utils/colors'
@@ -47,17 +47,9 @@ function HexagonLayer({ mapData, viewMode, selectedH3, onCellClick, version }) {
   const onCellClickRef = useRef(onCellClick)
   onCellClickRef.current = onCellClick
 
-  const context = useMemo(
-    () => ({
-      maxPopulation: mapData?.metadata?.max_population || 1,
-      maxVariety: mapData?.metadata?.max_variety || 1,
-    }),
-    [mapData?.metadata?.max_population, mapData?.metadata?.max_variety],
-  )
-
   const styleFeature = useCallback(
     (feature) => {
-      const color = getColorForMode(viewMode, feature.properties, context)
+      const color = getColorForMode(viewMode, feature.properties)
       const isSelected = feature.properties.h3_index === selectedH3
       return {
         fillColor: color,
@@ -67,7 +59,7 @@ function HexagonLayer({ mapData, viewMode, selectedH3, onCellClick, version }) {
         opacity: isSelected ? 1 : 0.35,
       }
     },
-    [viewMode, context, selectedH3],
+    [viewMode, selectedH3],
   )
 
   // Recolor in place on viewMode/selection change (no remount) so the

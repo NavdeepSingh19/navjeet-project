@@ -111,6 +111,7 @@ class CityDataset:
         self.max_population = float(populations.max())
         self.max_variety = float(varieties.max())
         self.avg_accessibility = self._compute_avg_accessibility()
+        self.avg_variety = float(varieties.mean())
 
     def _compute_avg_accessibility(self):
         safe_variety = np.where(self.varieties > 0, self.varieties, 1)
